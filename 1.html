@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Cybersecurity Team Names</title>
+  <style>
+    :root{
+      --bg1: #0f1724;
+      --bg2: #071028;
+      --card: rgba(255,255,255,0.04);
+      --accent: #00ffd5;
+      --accent-2: #7c4dff;
+      --glass: rgba(255,255,255,0.03);
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+      background: radial-gradient(1200px 600px at 10% 10%, rgba(124,77,255,0.08), transparent 8%),
+                  linear-gradient(180deg,var(--bg1), var(--bg2));
+      color:#e6eef8;
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:40px;
+    }
+    .container{
+      width:100%;
+      max-width:980px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border-radius:14px;
+      padding:28px;
+      box-shadow: 0 10px 30px rgba(2,6,23,0.7), inset 0 1px 0 rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.03);
+    }
+    header{
+      display:flex;
+      gap:16px;
+      align-items:center;
+      margin-bottom:18px;
+    }
+    .logo{
+      width:64px;height:64px;
+      display:grid;place-items:center;
+      border-radius:12px;
+      background: linear-gradient(135deg,var(--accent), var(--accent-2));
+      box-shadow: 0 6px 20px rgba(124,77,255,0.14);
+      flex:0 0 64px;
+    }
+    .logo svg{width:36px;height:36px;opacity:0.98}
+    h1{font-size:20px;margin:0}
+    p.lead{margin:0;color:rgba(230,238,248,0.7);font-size:13px}
+
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+      gap:16px;
+      margin-top:18px;
+    }
+    .card{
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border-radius:12px;
+      padding:18px;
+      min-height:120px;
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
+      border:1px solid rgba(255,255,255,0.03);
+      transition:transform .18s ease, box-shadow .18s ease;
+      position:relative;
+      overflow:hidden;
+    }
+    .card:hover{transform:translateY(-6px);box-shadow:0 16px 40px rgba(2,6,23,0.6)}
+    .team-name{
+      font-size:20px;font-weight:700;letter-spacing:0.6px;
+      background: linear-gradient(90deg,var(--accent-2), var(--accent));
+      -webkit-background-clip:text;background-clip:text;color:transparent;
+    }
+    .tag{font-size:12px;color:rgba(230,238,248,0.75)}
+
+    .meta{display:flex;gap:8px;align-items:center}
+    .pill{padding:6px 10px;border-radius:999px;background:var(--glass);font-size:12px}
+    .actions{display:flex;gap:10px;align-items:center}
+    button.copy{
+      appearance:none;border:0;padding:8px 10px;border-radius:8px;background:rgba(255,255,255,0.03);color:inherit;cursor:pointer;
+      font-size:13px
+    }
+    button.copy:active{transform:translateY(1px)}
+
+    footer{margin-top:16px;font-size:12px;color:rgba(230,238,248,0.6);display:flex;justify-content:space-between;align-items:center}
+
+    /* small screen adjustments */
+    @media (max-width:420px){
+      .container{padding:16px}
+      header{gap:10px}
+      .logo{width:52px;height:52px}
+      .team-name{font-size:18px}
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="logo" aria-hidden>
+        <!-- simple shield + circuit icon -->
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 2l7 3v5c0 5-3.9 9.7-7 12-3.1-2.3-7-7-7-12V5l7-3z" fill="white" opacity="0.12"/>
+          <path d="M12 4.2v6.6" stroke="white" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.95"/>
+          <circle cx="12" cy="14" r="0.9" fill="white" opacity="0.95"/>
+        </svg>
+      </div>
+      <div>
+        <h1>Cybersecurity Project(Team Members)</h1>
+      </div>
+    </header>
+
+    <main>
+      <div class="grid">
+        <section class="card" data-name="Red Team Reavers">
+          <div>
+            <div class="team-name">Rakshit Verma</div>
+          </div>
+          <div class="meta">
+            <div class="actions" style="margin-left:auto">
+            </div>
+          </div>
+        </section>
+
+        <section class="card" data-name="Blue Shield Unit">
+          <div>
+            <div class="team-name">Rahul Chhajed</div>
+          </div>
+          <div class="meta">
+            <div class="actions" style="margin-left:auto">
+            </div>
+          </div>
+        </section>
+
+        <section class="card" data-name="Crypto Sentinels">
+          <div>
+            <div class="team-name">Rishabh Verma</div>
+          </div>
+          <div class="meta">
+            <div class="actions" style="margin-left:auto">
+            </div>
+          </div>
+        </section>
+
+        <section class="card" data-name="VulnVipers">
+          <div>
+            <div class="team-name">Harsh Raj</div>
+          </div>
+          <div class="meta">
+            <div class="actions" style="margin-left:auto">
+            </div>
+          </div>
+        </section>
+
+      </div>
+
+      <footer>
+        <div style="opacity:0.8"></div>
+        <b><a href="https://net-sniff-2h39u1zxh-rakshit-vermas-projects.vercel.app/">👆 Click Here</a></b>
+      </footer>
+    </main>
+  </div>
+
+  <script>
+    function copyName(btn){
+      const card = btn.closest('.card');
+      const name = card?.dataset?.name || card.querySelector('.team-name').innerText;
+      if(!name) return;
+      navigator.clipboard?.writeText(name).then(()=>{
+        const old = btn.innerText;
+        btn.innerText = 'Copied';
+        setTimeout(()=> btn.innerText = old, 1200);
+      }).catch(()=>{
+        // fallback
+        const ta = document.createElement('textarea');
+        ta.value = name; document.body.appendChild(ta); ta.select();
+        try{document.execCommand('copy'); btn.innerText='Copied'; setTimeout(()=>btn.innerText='Copy',1200)}catch(e){alert('Unable to copy')}
+        ta.remove();
+      });
+    }
+  </script>
+</body>
+</html>

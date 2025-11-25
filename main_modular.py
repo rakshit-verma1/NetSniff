@@ -1,11 +1,6 @@
-"""
-NetSniff Pro - Main Application
-Modular architecture with tab-based organization
-"""
 import tkinter as tk
 from tkinter import ttk
 
-# Core utilities
 from network_utils import PacketCapture, get_wifi_name, get_public_ip
 from data_manager import PacketDataManager, FilterManager
 from security_manager import SecurityManager
@@ -23,55 +18,43 @@ class NetworkSnifferApp(tk.Tk):
         super().__init__()
         
         self.title("NetSniff Pro - Advanced Security Suite")
-        self.geometry("1600x900")
+        self.geometry("1800x900")
         self.minsize(1400, 700)
         
-        # Configure theme
         self.style = ttk.Style()
         self.style.theme_use('clam')
         
-        # Initialize core components
         self.public_ip = get_public_ip()
         self.data_manager = PacketDataManager()
         self.filter_manager = FilterManager(self.public_ip)
         self.security_manager = SecurityManager()
         
-        # Setup UI
         self.setup_interface()
         
-        # Initialize packet capture
         self.packet_capture = PacketCapture(
             self.handle_packet,
             self.handle_alert,
             self.security_manager
         )
         
-        # Window close handler
         self.protocol("WM_DELETE_WINDOW", self.close_app)
     
     def setup_interface(self):
-        """Setup main interface"""
         main_frame = ttk.Frame(self)
         main_frame.pack(fill="both", expand=True, padx=8, pady=8)
         
-        # Title section
         self.setup_title_section(main_frame)
         
-        # Tabbed interface
         self.notebook = ttk.Notebook(main_frame)
         self.notebook.pack(fill="both", expand=True, pady=(0, 5))
         
-        # Initialize all tabs
         self.init_tabs()
         
-        # Control section
         self.setup_control_section(main_frame)
         
-        # Status bar
         self.setup_status_bar(main_frame)
     
     def setup_title_section(self, parent):
-        """Setup title and statistics section"""
         title_section = ttk.Frame(parent)
         title_section.pack(fill="x", pady=(0, 10))
         
@@ -94,8 +77,7 @@ class NetworkSnifferApp(tk.Tk):
                  font=("Arial", 9, "bold"), foreground="#d32f2f").pack(side="left", padx=5)
     
     def init_tabs(self):
-        """Initialize all tab modules"""
-        # Tab 1: Packet Capture
+
         self.packet_capture_tab = PacketCaptureTab(
             self.notebook,
             self.data_manager,
@@ -104,14 +86,12 @@ class NetworkSnifferApp(tk.Tk):
         )
         self.notebook.add(self.packet_capture_tab.get_frame(), text="📡 Packet Capture")
         
-        # Tab 2: Download Manager
         self.download_manager_tab = DownloadManagerTab(
             self.notebook,
             self.security_manager
         )
         self.notebook.add(self.download_manager_tab.get_frame(), text="⬇️ Download Manager")
         
-        # Tab 3: Threat Detection
         self.threat_detection_tab = ThreatDetectionTab(
             self.notebook,
             self.security_manager
@@ -140,7 +120,6 @@ class NetworkSnifferApp(tk.Tk):
         self.notebook.add(self.protocol_inspector_tab.get_frame(), text="🔍 Protocol Inspector")
     
     def setup_control_section(self, parent):
-        """Setup control buttons"""
         control_section = ttk.Frame(parent)
         control_section.pack(fill="x", pady=(5, 0))
         
@@ -165,7 +144,6 @@ class NetworkSnifferApp(tk.Tk):
                   command=self.data_manager.export_to_csv, width=15).pack(side="right")
     
     def setup_status_bar(self, parent):
-        """Setup status bar"""
         status_frame = ttk.Frame(parent, relief="sunken", borderwidth=1)
         status_frame.pack(fill="x", pady=(5, 0))
         
@@ -194,7 +172,6 @@ class NetworkSnifferApp(tk.Tk):
         self.status_var.trace_add("write", self.update_status_color)
     
     def update_status_color(self, *args):
-        """Update status label color"""
         status = self.status_var.get()
         if "Running" in status:
             self.status_label.configure(foreground="#2e7d32")
@@ -202,7 +179,6 @@ class NetworkSnifferApp(tk.Tk):
             self.status_label.configure(foreground="#d32f2f")
     
     def start_capturing(self):
-        """Start packet capture"""
         self.clear_all_data()
         self.status_var.set("Status: Running")
         self.start_button["state"] = "disabled"
@@ -211,7 +187,6 @@ class NetworkSnifferApp(tk.Tk):
         self.packet_capture_tab.add_alert("Packet capture started - All security features enabled")
     
     def stop_capturing(self):
-        """Stop packet capture"""
         self.packet_capture.stop_capture()
         self.status_var.set("Status: Stopped")
         self.start_button["state"] = "normal"
@@ -219,29 +194,24 @@ class NetworkSnifferApp(tk.Tk):
         self.packet_capture_tab.add_alert("Packet capture stopped")
     
     def clear_all_data(self):
-        """Clear all data across tabs"""
         self.data_manager.clear_data()
         self.security_manager.clear_data()
         self.packet_capture_tab.clear_all()
         self.update_statistics()
     
     def update_statistics(self):
-        """Update main statistics display"""
         self.packet_count_var.set(f"Packets: {self.data_manager.get_packet_count()}")
         self.alert_count_var.set(f"Alerts: {self.data_manager.get_alert_count()}")
         threat_score = self.security_manager.get_current_threat_score()
         self.threat_score_var.set(f"Threat Score: {threat_score}/100")
     
     def handle_packet(self, packet_info):
-        """Handle incoming packet - distribute to all tabs"""
-        # Apply filters from packet capture tab
+
         if not self.packet_capture_tab.should_display(packet_info):
             return
         
-        # Add to data manager
         self.data_manager.add_packet(packet_info)
         
-        # Update all tabs
         self.packet_capture_tab.process_packet(packet_info)
         self.download_manager_tab.process_packet(packet_info)
         self.threat_detection_tab.process_packet(packet_info)
@@ -249,17 +219,14 @@ class NetworkSnifferApp(tk.Tk):
         self.privacy_leak_tab.process_packet(packet_info)
         self.protocol_inspector_tab.process_packet(packet_info)
         
-        # Update statistics
         self.update_statistics()
     
     def handle_alert(self, alert_message):
-        """Handle security alert"""
         self.packet_capture_tab.add_alert(alert_message)
         self.data_manager.increment_alerts()
         self.update_statistics()
     
     def close_app(self):
-        """Clean shutdown"""
         if hasattr(self, 'packet_capture'):
             self.packet_capture.stop_capture()
         self.quit()

@@ -1,4 +1,3 @@
-
 import csv
 from tkinter import filedialog, messagebox
 
@@ -9,7 +8,8 @@ class PacketDataManager:
         self.alert_count = 0
 
     def add_packet(self, packet_info):
-        self.packet_data.append(packet_info)
+        packet_info_without_obj = packet_info[:-1] if len(packet_info) > 8 else packet_info
+        self.packet_data.append(packet_info_without_obj)
         self.packet_count += 1
 
     def clear_data(self):
@@ -57,7 +57,7 @@ class FilterManager:
         self.public_ip = public_ip
 
     def should_display_packet(self, packet_info, filters):
-        time, source_ip, dest_ip, protocol, sport, dport, source_dns, dest_dns = packet_info
+        time, source_ip, dest_ip, protocol, sport, dport, source_dns, dest_dns = packet_info[:8]
 
         protocol_filter = filters.protocol_var.get()
         if protocol_filter and protocol != protocol_filter:
